@@ -33,18 +33,16 @@ export default class ConcretePuzzle extends Puzzle {
 		for (const i in this.file) {
 			if (this.file[i] != '') {
 				groupTotal += parseInt(this.file[i]);
-			} else {
-				highestAmounts = highestAmounts.sort((a, b) => a - b);
-				if (
-					highestAmounts.some((value) => {
-						return value < groupTotal;
-					})
-				) {
-					highestAmounts.shift();
-					highestAmounts.push(groupTotal);
-				}
-				groupTotal = 0;
+				continue;
 			}
+			highestAmounts = highestAmounts.sort((a, b) => a - b);
+
+			if (highestAmounts.some((value) => value < groupTotal)) {
+				highestAmounts.shift();
+				highestAmounts.push(groupTotal);
+			}
+
+			groupTotal = 0;
 		}
 		return `Total calories: ${
 			highestAmounts[0] + highestAmounts[1] + highestAmounts[2]
