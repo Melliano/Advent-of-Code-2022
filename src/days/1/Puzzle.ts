@@ -8,17 +8,16 @@ export default class ConcretePuzzle extends Puzzle {
 	public solveFirst(): string {
 		let groupTotal = 0;
 		let highestAmount = 0;
+
 		for (const i in this.file) {
 			if (this.file[i] != '') {
 				groupTotal += parseInt(this.file[i]);
-			} else {
-				if (groupTotal >= highestAmount) {
-					highestAmount = groupTotal;
-				}
-				groupTotal = 0;
+				continue;
 			}
+			highestAmount = groupTotal > highestAmount ? groupTotal : highestAmount;
+			groupTotal = 0;
 		}
-		return highestAmount.toString();
+		return `${highestAmount}`;
 	}
 
 	public getFirstExpectedResult(): string {
@@ -44,9 +43,7 @@ export default class ConcretePuzzle extends Puzzle {
 
 			groupTotal = 0;
 		}
-		return `Total calories: ${
-			highestAmounts[0] + highestAmounts[1] + highestAmounts[2]
-		}`;
+		return `${highestAmounts.reduce((sum, current) => sum + current, 0)}`;
 	}
 
 	public getSecondExpectedResult(): string {
