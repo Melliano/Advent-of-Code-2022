@@ -11,7 +11,6 @@ export default class ConcretePuzzle extends Puzzle {
 
     public solveFirst(): string {
         let runningTotal = 0;
-        console.log(this.puzzleInput);
         for (let x = 0; x < this.puzzleInput.length; x++) {
             const elfRanges = 
                 this.sortData([{ min: 0, max: 0 }, { min: 0, max: 0 }]
